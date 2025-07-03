@@ -41,6 +41,7 @@ function App() {
       textposition: "top center",
       name: pattern.pattern,
       line: { shape: "linear" },
+      marker: { size: 8 },
     };
   });
 
@@ -68,7 +69,11 @@ function App() {
             <option value="1d">1 Day</option>
           </select>
         </label>
-        <button onClick={fetchPatternsFromAPI} disabled={loading} style={{ marginLeft: 20 }}>
+        <button
+          onClick={fetchPatternsFromAPI}
+          disabled={loading}
+          style={{ marginLeft: 20 }}
+        >
           {loading ? "Loading..." : "Fetch Patterns"}
         </button>
       </div>
