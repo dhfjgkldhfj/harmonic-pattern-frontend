@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://harmonic-pattern-backend.onrender.com";
+const BASE_URL = "https://harmonic-pattern-backend.onrender.com";  // غيّرها لعنوان باك اند الخاص بك
 
 export async function fetchPatterns(symbol, interval) {
   try {
