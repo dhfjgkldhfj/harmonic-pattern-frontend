@@ -25,16 +25,22 @@ function App() {
     }
   };
 
-  const plotData = patterns.map((pattern, idx) => ({
-    x: Object.values(pattern.points),
-    y: Object.values(pattern.points),
-    type: "scatter",
-    mode: "lines+markers+text",
-    text: ["X", "A", "B", "C", "D"],
-    textposition: "top center",
-    name: pattern.pattern,
-    line: { shape: "linear" },
-  }));
+  const plotData = patterns.map((pattern, idx) => {
+    const pointLabels = ["X", "A", "B", "C", "D"];
+    const yValues = Object.values(pattern.points);
+    const xValues = yValues.map((_, i) => i); // [0,1,2,3,4]
+
+    return {
+      x: xValues,
+      y: yValues,
+      type: "scatter",
+      mode: "lines+markers+text",
+      text: pointLabels,
+      textposition: "top center",
+      name: pattern.pattern,
+      line: { shape: "linear" },
+    };
+  });
 
   return (
     <div style={{ padding: 20 }}>
