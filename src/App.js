@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
-import { fetchPatterns as getPatternsFromAPI } from "./api";
+import { fetchPatterns } from "./api";
 
 function App() {
   const [patterns, setPatterns] = useState([]);
@@ -9,13 +9,14 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchPatterns();
+    fetchPatternsFromAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchPatterns = async () => {
+  const fetchPatternsFromAPI = async () => {
     setLoading(true);
     try {
-      const data = await getPatternsFromAPI(symbol, interval);
+      const data = await fetchPatterns(symbol, interval);
       setPatterns(data);
     } catch (error) {
       console.error("Error fetching patterns:", error);
@@ -67,7 +68,7 @@ function App() {
             <option value="1d">1 Day</option>
           </select>
         </label>
-        <button onClick={fetchPatterns} disabled={loading} style={{ marginLeft: 20 }}>
+        <button onClick={fetchPatternsFromAPI} disabled={loading} style={{ marginLeft: 20 }}>
           {loading ? "Loading..." : "Fetch Patterns"}
         </button>
       </div>
@@ -75,7 +76,7 @@ function App() {
       <Plot
         data={plotData}
         layout={{
-          width: 800,
+          width: 900,
           height: 600,
           title: `Harmonic Patterns for ${symbol} (${interval})`,
           xaxis: { title: "Index" },
