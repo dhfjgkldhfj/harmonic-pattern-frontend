@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
-import axios from "axios";
+import { fetchPatterns as getPatternsFromAPI } from "./api";
 
 function App() {
   const [patterns, setPatterns] = useState([]);
@@ -10,15 +10,14 @@ function App() {
 
   useEffect(() => {
     fetchPatterns();
+    // eslint-disable-next-line
   }, []);
 
   const fetchPatterns = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://harmonic-pattern-backend.onrender.com/patterns?symbol=${symbol}&interval=${interval}`
-      );
-      setPatterns(response.data.patterns);
+      const data = await getPatternsFromAPI(symbol, interval);
+      setPatterns(data);
     } catch (error) {
       console.error("Error fetching patterns:", error);
     } finally {
@@ -26,7 +25,6 @@ function App() {
     }
   };
 
-  // تبسيط رسم نقاط الأنماط كنموذج
   const plotData = patterns.map((pattern, idx) => ({
     x: Object.values(pattern.points),
     y: Object.values(pattern.points),
