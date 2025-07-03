@@ -10,7 +10,6 @@ function App() {
 
   useEffect(() => {
     fetchPatterns();
-    // eslint-disable-next-line
   }, []);
 
   const fetchPatterns = async () => {
@@ -25,17 +24,19 @@ function App() {
     }
   };
 
-  const plotData = patterns.map((pattern, idx) => {
-    const pointLabels = ["X", "A", "B", "C", "D"];
-    const yValues = Object.values(pattern.points);
-    const xValues = yValues.map((_, i) => i); // [0,1,2,3,4]
+  const plotData = patterns.map((pattern) => {
+    const labels = ["X", "A", "B", "C", "D"];
+    const pointsEntries = Object.entries(pattern.points);
+
+    const xVals = pointsEntries.map(([_, point]) => point.index);
+    const yVals = pointsEntries.map(([_, point]) => point.price);
 
     return {
-      x: xValues,
-      y: yValues,
+      x: xVals,
+      y: yVals,
       type: "scatter",
       mode: "lines+markers+text",
-      text: pointLabels,
+      text: labels,
       textposition: "top center",
       name: pattern.pattern,
       line: { shape: "linear" },
