@@ -1,1 +1,15 @@
-// API calls
+import axios from "axios";
+
+const BASE_URL = "https://your-backend-url.onrender.com";
+
+export async function fetchPatterns(symbol, interval) {
+  try {
+    const response = await axios.get(`${BASE_URL}/patterns`, {
+      params: { symbol, interval },
+    });
+    return response.data.patterns || [];
+  } catch (error) {
+    console.error("API fetchPatterns error:", error);
+    return [];
+  }
+}
