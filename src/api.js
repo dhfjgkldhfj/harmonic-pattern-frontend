@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://your-backend-url.onrender.com";
+const BASE_URL = "https://harmonic-pattern-backend.onrender.com";
 
 export async function fetchPatterns(symbol, interval) {
   try {
