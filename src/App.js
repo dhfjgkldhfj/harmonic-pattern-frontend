@@ -16,7 +16,7 @@ function App() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://your-backend-url.onrender.com/patterns?symbol=${symbol}&interval=${interval}`
+        `https://harmonic-pattern-backend.onrender.com/patterns?symbol=${symbol}&interval=${interval}`
       );
       setPatterns(response.data.patterns);
     } catch (error) {
